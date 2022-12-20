@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Root</title>
+
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@200&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Unbounded', cursive;
+            color: rgb(140, 140, 210);;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+        }
+        nav {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 10%;
+            background-color: rgb(140, 140, 210);
+            font-size: 5vmin;
+        }
+
+        a {
+            color: black;
+            text-decoration: none;
+            margin: 1rem;
+        }
+
+        a:hover {
+            border-bottom: 2px solid black;
+        }
+
+        #root {
+            width: 100%;
+            height: 100%;
+
+            background-color: rgb(51, 51, 51);
+        }
+    </style>
+
+</head>
+<body>
+
+    
+    <script type="module" src="./router.js"></script>
+    <source type="module" src="./store.js" type="">
+    <nav>
+        <a href="/home" onclick="route">Home</a>
+        <a href="/test" onclick="route">Test</a>
+    </nav>
+    <div id="root">
+        
+        <main style="display: flex; justify-content: center; align-items: center; width: 100%; height: 100%;">
+            <p style="font-size: 4vmin;">
+                Wellcome to the SPA site development and testing!
+            </p>
+        <main>
+    </div>
+</body>
+</html>

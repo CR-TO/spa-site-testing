@@ -1,0 +1,69 @@
+
+<template>
+
+    <style>
+        #main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            font-size: 10vmin;
+        }
+
+        div {
+            flex-direction: column;
+        }
+
+        button {
+            width: 20vmin;
+            height: 5vmin;
+            font-size: 2vmin;
+            border-radius: 10vmin;
+            border: 2px solid darkgreen;
+            background-color: limegreen;
+            color: black;
+            transition: 250ms;
+        }
+
+        button:hover {
+            cursor: pointer;
+            transform: scale(1.05);
+        }
+    </style>
+
+    <main id='main'>
+        <div>
+            <p>Counter: <span id="counter-span"></span></p>
+            <button id="counter-button">Count!</button>
+            <button id="storage-clear">Clear storage</button>
+        </div>
+    </main>
+</template>
+
+<script>
+
+import { store } from '../store.js'
+
+const init = () => {
+
+    const counterButton = document.querySelector('#counter-button')
+    const counterSpan = document.querySelector('#counter-span')
+    counterButton.addEventListener('click', () => {
+        store.set('counter', parseInt(store.get('counter') ?? 0) + 1);
+        counterSpan.textContent = store.get('counter')
+    })
+
+    counterSpan.textContent = store.get('counter') ?? 0;
+
+    const clearStorage = document.querySelector('#storage-clear');
+    clearStorage.addEventListener('click', () => {
+        store.set('counter', 0);
+        counterSpan.textContent = store.get('counter')
+    })
+}
+
+init();
+
+</script>
