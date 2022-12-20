@@ -2,16 +2,6 @@
 <template>
 
     <style>
-        #main {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            font-size: 10vmin;
-        }
-
         div {
             flex-direction: column;
         }
@@ -46,6 +36,8 @@
 
 import { store } from '../store.js'
 
+import { router, routes, getPage } from '../router.js'
+
 const init = () => {
 
     const counterButton = document.querySelector('#counter-button')
@@ -58,10 +50,13 @@ const init = () => {
     counterSpan.textContent = store.get('counter') ?? 0;
 
     const clearStorage = document.querySelector('#storage-clear');
-    clearStorage.addEventListener('click', () => {
+    clearStorage.addEventListener('click', async () => {
         store.set('counter', 0);
         counterSpan.textContent = store.get('counter')
+        router.setLocation('/');
     })
+
+    routes['/page'] = './page.html';
 }
 
 init();

@@ -1,4 +1,49 @@
 
 <template>
-    <h1>page</h1>
+
+    <style>
+        main {
+            flex-direction: column;
+        }
+    </style>
+
+    <main>
+     <iframe src="" id="api-frame" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+     <button id="load-model">Load</button>
+    </main>
 </template>
+
+<script type="text/javascript" src="https://static.sketchfab.com/api/sketchfab-viewer-1.12.1.js"></script>
+
+<script>
+
+    import { store } from '../store.js';
+
+    var iframe = document.getElementById( 'api-frame' );
+    var client = new Sketchfab( iframe );
+
+    let initClient = () => {
+
+    var uid = '7w7pAfrCfjovwykkEeRFLGw5SXS';
+
+    client.init( uid, {
+        success: function onSuccess( api ){
+            api.start();
+            api.addEventListener( 'viewerready', function() {
+
+                console.log( 'Viewer is ready' );
+            } );
+        },
+        error: function onError() {
+            console.log( 'Viewer error' );
+        }
+    } );
+
+    
+    }
+    
+    document.querySelector('#load-model').addEventListener('click', () => {
+        initClient();
+    })
+</script>
+

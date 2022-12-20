@@ -1,5 +1,11 @@
 
 
+export const router = {
+    setLocation: (location) => {
+        window.location = location;
+    }
+}
+
 const route = (event) => {
     event = event || window.event;
     event.preventDefault();
@@ -7,12 +13,11 @@ const route = (event) => {
     handleSwitch();
 }
 
-const routes = {
+export let routes = {
     404: './pages/404.html',
     '/': './index.html',
     '/home': './pages/home.html',
-    '/test': './pages/test.html',
-    '/page': './pages/page.html'
+    '/test': './pages/page.html',
 }
 
 
@@ -36,12 +41,20 @@ export const getPage = async (id) => {
         app.innerHTML = template;
     }
 
-    let script = doc.getElementsByTagName('script').item(0);
+    let scripts = doc.getElementsByTagName('script');
 
-    if (script !== null) {
+
+    for(const script of scripts)
+    {
         let scritpDom = document.createElement('script');
-        scritpDom.type = 'module'
-        scritpDom.innerHTML = script.innerHTML;
+        if (script.textContent == ''){
+            let d = await fetch(script.src);
+            let j = await d.text();
+            scritpDom.innerHTML = j;
+        } else {
+            scritpDom.type = 'module'
+            scritpDom.innerHTML = script.innerHTML;
+        }
         app.appendChild(scritpDom)
     }
 }
@@ -51,10 +64,8 @@ export const handleSwitch = async () => {
     const path = window.location.pathname;
     if (path !== '/'){
     const route = routes[path] || routes[404];
-    console.log(route);
-
     await getPage(route)
-}
+    }
 }
 
 window.route = route;
